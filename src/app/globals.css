@@ -293,5 +293,57 @@ p {
 .project-buttons {
   @apply flex flex-col sm:flex-row justify-center items-center gap-4 mt-6;
 }
+/* === CONTACT SECTION === */
+.contact-card::after {
+  /* faint inner vignette */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+  box-shadow: inset 0 1px 40px rgba(15, 23, 42, 0.5);
+  z-index: -1;
+}
+
+/* Focus ring for inputs and textareas */
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+}
+
+/* Optional smooth glow hover for button */
+button:hover {
+  filter: brightness(1.05);
+  transition: filter 0.3s ease;
+}
+
+/* Add subtle animated gradient pulse behind the card */
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, #7c3aed, #ec4899, #7c3aed);
+  opacity: 0.15;
+  background-size: 200% 200%;
+  animation: gradientPulse 6s ease infinite;
+  z-index: -2;
+}
+
+@keyframes gradientPulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+footer a:hover svg {
+  filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.5));
+}
 
 

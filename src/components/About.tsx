@@ -26,7 +26,7 @@ export default function About() {
         defaults: { ease: "power3.out", duration: 0.8 },
       });
 
-      tl.from(".about-title", { y: 20, opacity: 0, delay: 0.05 }) // slightly lower initial delay
+      tl.from(".about-title", { y: 20, opacity: 0, delay: 0.05 }) 
         .from(".about-line", {
           scaleX: 0,
           opacity: 0,

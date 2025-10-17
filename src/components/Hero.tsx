@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { Link } from "react-scroll";
 
 export default function Hero() {
   const root = useRef<HTMLDivElement | null>(null);
@@ -77,12 +78,10 @@ export default function Hero() {
           </p>
 
           <div className="hero-cta flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-            <Button className="btn-primary" aria-label="Download Resume">
-              Download Resume
-            </Button>
-            <Button className="btn-secondary" aria-label="View Projects">
+            
+            <Link to="projects" spy={true} smooth={true} offset={-100} duration={500}  className="btn-secondary" aria-label="View Projects">
               View Projects
-            </Button>
+            </Link>
           </div>
         </div>
       </div>

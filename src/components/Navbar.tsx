@@ -35,7 +35,10 @@ export default function Navbar() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const blur = Math.min(scrollY / 100, 8);
-      gsap.to(navRef.current, { backdropFilter: `blur(${blur}px)`, duration: 0.3 });
+      gsap.to(navRef.current, {
+        backdropFilter: `blur(${blur}px)`,
+        duration: 0.3,
+      });
 
       // Determine scroll direction
       if (scrollY > lastScrollY.current && scrollY > 50) {
@@ -86,30 +89,24 @@ export default function Navbar() {
         {/* Logo / Name */}
         <h1 className="text-2xl font-heading font-semibold bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] text-transparent bg-clip-text tracking-tight">
           <Link to="home" smooth duration={500}>
-            MyPortfolio
+            Shahadat
           </Link>
         </h1>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8">
-          {["home", "about", "education", "skills", "projects", "contact"].map(
-            (item) => (
-              <Link
-                key={item}
-                to={item}
-                smooth
-                duration={500}
-                offset={-80}
-                className="nav-link"
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </Link>
-            )
-          )}
-
-          <a href="/resume.pdf" download>
-            <Button className="text-white">Download Resume</Button>
-          </a>
+          {["home", "about", "skills", "projects", "contact"].map((item) => (
+            <Link
+              key={item}
+              to={item}
+              smooth
+              duration={500}
+              offset={-80}
+              className="nav-link"
+            >
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </Link>
+          ))}
         </div>
 
         {/* Mobile Menu Button */}
@@ -154,7 +151,7 @@ export default function Navbar() {
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                {["home", "about", "education", "skills", "projects", "contact"].map(
+                {["home", "about", "skills", "projects", "contact"].map(
                   (item) => (
                     <Link
                       key={item}
@@ -169,10 +166,6 @@ export default function Navbar() {
                     </Link>
                   )
                 )}
-
-                <a href="/resume.pdf" download onClick={toggleMenu}>
-                  <Button className="w-full text-white">Download Resume</Button>
-                </a>
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>

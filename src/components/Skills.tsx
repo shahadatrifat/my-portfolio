@@ -19,7 +19,10 @@ const frontend: Skill[] = [
   { id: "next", name: "Next.js", file: "/next.svg" },
   { id: "tailwind", name: "Tailwind CSS", file: "/tailwind.svg" },
   { id: "shadcn", name: "shadcn/ui", file: "/shadcn.svg" },
-  { id: "state", name: "Router / Context / Redux", file: "/Redux.svg" },
+  { id: "state", name: "Router", file: "/react-router.svg" },
+  { id: "context", name: "Context", file: "/context-api.svg" },
+  { id: "redux", name: "Redux", file: "/redux.svg" },
+
 ];
 
 const backend: Skill[] = [

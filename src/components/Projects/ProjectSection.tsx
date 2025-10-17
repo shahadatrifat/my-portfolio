@@ -14,30 +14,43 @@ export default function ProjectSection() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const sections = gsap.utils.toArray(".project-card");
-    const totalScroll = (sections.length - 1) * window.innerWidth;
+    // 🧹 Clean previous triggers first
+    ScrollTrigger.getAll().forEach((st) => st.kill());
 
     const ctx = gsap.context(() => {
+      const sections = gsap.utils.toArray<HTMLElement>(".project-card");
+      if (!sections.length) return;
+
+      // Total scroll distance based on viewport width
+      const totalScroll = (sections.length - 1) * window.innerWidth;
+
       gsap.to(sections, {
         xPercent: -100 * (sections.length - 1),
         ease: "none",
         scrollTrigger: {
-          id: "projects-scroll", 
+          id: "projects-scroll",
           trigger: containerRef.current,
           pin: true,
           scrub: 1.2,
           end: () => `+=${totalScroll}`,
+          invalidateOnRefresh: true,
         },
       });
-
-     
     }, containerRef);
 
-    return () => ctx.revert();
+    // 🧹 Cleanup on unmount
+    return () => {
+      ctx.revert();
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    };
   }, []);
 
   return (
-    <section id="projects" ref={containerRef} className="relative overflow-hidden">
+    <section
+      id="projects"
+      ref={containerRef}
+      className="relative overflow-hidden block"
+    >
       <div className="flex">
         {projects.map((project) => (
           <ProjectCard key={project.id} {...project} />
