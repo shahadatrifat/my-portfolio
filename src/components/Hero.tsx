@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Button } from "./ui/button";
 import Image from "next/image";
 import { Link } from "react-scroll";
 
