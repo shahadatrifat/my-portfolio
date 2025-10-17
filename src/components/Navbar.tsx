@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-scroll";
 import { Button } from "./ui/button";
 import { Menu, Plus } from "lucide-react";
@@ -11,6 +11,9 @@ import * as Dialog from "@radix-ui/react-dialog";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [iconRotation, setIconRotation] = useState(0);
+  const [scrollDir, setScrollDir] = useState("up");
+  const lastScrollY = useRef(0);
+  const navRef = useRef<HTMLElement | null>(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -19,7 +22,7 @@ export default function Navbar() {
 
   // GSAP: Navbar slide-in on mount
   useEffect(() => {
-    gsap.from("nav", {
+    gsap.from(navRef.current, {
       y: -60,
       opacity: 0,
       duration: 1.2,
@@ -32,7 +35,15 @@ export default function Navbar() {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const blur = Math.min(scrollY / 100, 8);
-      gsap.to("nav", { backdropFilter: `blur(${blur}px)`, duration: 0.3 });
+      gsap.to(navRef.current, { backdropFilter: `blur(${blur}px)`, duration: 0.3 });
+
+      // Determine scroll direction
+      if (scrollY > lastScrollY.current && scrollY > 50) {
+        setScrollDir("down");
+      } else {
+        setScrollDir("up");
+      }
+      lastScrollY.current = scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -55,8 +66,22 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
+  // GSAP: Hide/show navbar based on scroll
+  useEffect(() => {
+    if (navRef.current) {
+      if (scrollDir === "down") {
+        gsap.to(navRef.current, { y: -100, duration: 0.5, ease: "power2.out" });
+      } else {
+        gsap.to(navRef.current, { y: 0, duration: 0.5, ease: "power2.out" });
+      }
+    }
+  }, [scrollDir]);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent p-4 shadow-md backdrop-blur-lg">
+    <nav
+      ref={navRef}
+      className="fixed top-0 left-0 right-0 z-50 bg-transparent p-4 shadow-md backdrop-blur-lg transition-transform"
+    >
       <div className="container mx-auto flex justify-between items-center gap-2">
         {/* Logo / Name */}
         <h1 className="text-2xl font-heading font-semibold bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] text-transparent bg-clip-text tracking-tight">

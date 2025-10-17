@@ -1,34 +1,32 @@
-// components/projects/data.ts
-
 export const projects = [
   {
     id: "freshfinds",
     title: "FreshFinds",
     description:
-      "A modern grocery discovery platform that connects customers with curated organic stores. Built with React, Firebase, and Tailwind.",
-    tech: ["React", "Firebase", "Tailwind CSS"],
+      "A modern grocery platform with vendor, customer and admin dashboards, Stripe integration, and real-time updates built using React, Firebase, and Node.js.",
+    tech: ["React", "Firebase", "Node.js", "Stripe"],
     image: "/freshfinds-ss.png",
-    live: "#",
-    github: "#",
+    live: "https://freshfinds.netlify.app",
+    github: "https://github.com/yourgithub/freshfinds",
   },
   {
     id: "foliora",
     title: "Foliora",
     description:
-      "A virtual bookshelf web app where users can review, upvote, and organize books. Built using Next.js, MongoDB, and Framer Motion.",
-    tech: ["Next.js", "MongoDB", "Framer Motion"],
+      "An elegant virtual bookshelf where users can add, review, and upvote books, featuring smooth animations and MongoDB backend.",
+    tech: ["Next.js", "MongoDB", "Framer Motion", "TailwindCSS"],
     image: "/foliora.png",
-    live: "#",
-    github: "#",
+    live: "https://foliora.vercel.app",
+    github: "https://github.com/yourgithub/foliora",
   },
   {
     id: "parcelflow",
-    title: "ParcelFlow",
+    title: "RecipeBook",
     description:
-      "A parcel delivery management platform featuring live map tracking and real-time status updates. Built with React, Leaflet, and Node.js.",
-    tech: ["React", "Node.js", "Leaflet"],
+      "A parcel tracking web app with Firebase Auth, dynamic pricing, Leaflet maps, and real-time delivery status updates.",
+    tech: ["React", "Firebase", "Leaflet", "Express"],
     image: "/recipebook.png",
-    live: "#",
-    github: "#",
+    live: "https://recipe-book-4fc868.netlify.app/",
+    github: "https://github.com/yourgithub/parcelflow",
   },
 ];

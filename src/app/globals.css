@@ -290,5 +290,8 @@ p {
 .animate-border-glow {
   animation: border-glow 6s linear infinite;
 }
+.project-buttons {
+  @apply flex flex-col sm:flex-row justify-center items-center gap-4 mt-6;
+}
 
 

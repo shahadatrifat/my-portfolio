@@ -3,54 +3,44 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { projects } from "./data";
 import ProjectCard from "./ProjectCard";
+import { projects } from "./data";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectSection() {
-  const root = useRef<HTMLDivElement | null>(null);
-  const horizontalRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!root.current || !horizontalRef.current) return;
+    if (!containerRef.current) return;
 
-    const sections = gsap.utils.toArray(".project-panel");
+    const sections = gsap.utils.toArray(".project-card");
+    const totalScroll = (sections.length - 1) * window.innerWidth;
 
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: root.current,
-        pin: true,
-        scrub: 1,
-        snap: 1 / (sections.length - 1),
-        end: () => "+=" + horizontalRef.current?.offsetWidth,
-      },
-    });
+    const ctx = gsap.context(() => {
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          id: "projects-scroll", 
+          trigger: containerRef.current,
+          pin: true,
+          scrub: 1.2,
+          end: () => `+=${totalScroll}`,
+        },
+      });
 
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+     
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      id="projects"
-      ref={root}
-      className="relative w-full overflow-hidden bg-[var(--color-midnight-900)]"
-    >
-      <div
-        ref={horizontalRef}
-        className="flex flex-row w-[300vw] h-screen project-scroll"
-      >
+    <section id="projects" ref={containerRef} className="relative overflow-hidden">
+      <div className="flex">
         {projects.map((project) => (
-          <div
-            key={project.id}
-            className="project-panel flex-shrink-0 w-screen h-screen"
-          >
-            <ProjectCard {...project} />
-          </div>
+          <ProjectCard key={project.id} {...project} />
         ))}
       </div>
     </section>
