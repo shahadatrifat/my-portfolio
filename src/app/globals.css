@@ -1,26 +1,294 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-midnight-50: #f8fafc;
+  --color-midnight-100: #f1f5f9;
+  --color-midnight-200: #e2e8f0;
+  --color-midnight-800: #1e293b;
+  --color-midnight-900: #0f172a;
+  --color-indigo-accent: #6366f1;
+  --color-violet-accent: #8b5cf6;
+
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+/* Base styling (applies to entire site) */
+html,
+body {
+  @apply bg-gradient-to-br from-[var(--color-midnight-900)] to-[var(--color-midnight-800)] text-[var(--color-midnight-100)] font-body scroll-smooth;
+}
+
+/* Headings use Space Grotesk */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading font-semibold tracking-tight;
+}
+
+p {
+  @apply font-body font-normal;
+}
+
+/* For buttons and hover accents */
+.btn-primary {
+  @apply inline-block bg-[var(--color-indigo-accent)] text-white font-heading py-2 px-5 rounded-lg transition-all duration-300 hover:bg-[var(--color-violet-accent)] hover:scale-105;
+}
+
+/* Optional global container class */
+.section {
+  @apply min-h-screen  justify-center items-center px-6 md:px-20;
+}
+/* --- ENHANCED DESKTOP NAV LINK HOVER EFFECT --- */
+.nav-link-desktop {
+  /* Set initial text color to white (midnight-100) */
+  @apply relative cursor-pointer text-[var(--color-midnight-100)] transition-all duration-300;
+}
+
+/* Pseudo-element for the underline */
+.nav-link-desktop::after {
+  content: '';
+  /* Initial state: zero width, accent color */
+  @apply absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[var(--color-indigo-accent)] transition-all duration-300;
+}
+
+/* Hover state changes color and expands underline */
+.nav-link-desktop:hover {
+  @apply text-[var(--color-indigo-accent)]; /* Change text color on hover */
+}
+
+.nav-link-desktop:hover::after {
+  @apply w-full; /* Expand underline to full width */
 }
 
 @theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.13 0.028 261.692);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.028 261.692);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.13 0.028 261.692);
+  --primary: oklch(0.21 0.034 264.665);
+  --primary-foreground: oklch(0.985 0.002 247.839);
+  --secondary: oklch(0.967 0.003 264.542);
+  --secondary-foreground: oklch(0.21 0.034 264.665);
+  --muted: oklch(0.967 0.003 264.542);
+  --muted-foreground: oklch(0.551 0.027 264.364);
+  --accent: oklch(0.967 0.003 264.542);
+  --accent-foreground: oklch(0.21 0.034 264.665);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.928 0.006 264.531);
+  --input: oklch(0.928 0.006 264.531);
+  --ring: oklch(0.707 0.022 261.325);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0.002 247.839);
+  --sidebar-foreground: oklch(0.13 0.028 261.692);
+  --sidebar-primary: oklch(0.21 0.034 264.665);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.967 0.003 264.542);
+  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
+  --sidebar-border: oklch(0.928 0.006 264.531);
+  --sidebar-ring: oklch(0.707 0.022 261.325);
+}
+
+.dark {
+  --background: oklch(0.13 0.028 261.692);
+  --foreground: oklch(0.985 0.002 247.839);
+  --card: oklch(0.21 0.034 264.665);
+  --card-foreground: oklch(0.985 0.002 247.839);
+  --popover: oklch(0.21 0.034 264.665);
+  --popover-foreground: oklch(0.985 0.002 247.839);
+  --primary: oklch(0.928 0.006 264.531);
+  --primary-foreground: oklch(0.21 0.034 264.665);
+  --secondary: oklch(0.278 0.033 256.848);
+  --secondary-foreground: oklch(0.985 0.002 247.839);
+  --muted: oklch(0.278 0.033 256.848);
+  --muted-foreground: oklch(0.707 0.022 261.325);
+  --accent: oklch(0.278 0.033 256.848);
+  --accent-foreground: oklch(0.985 0.002 247.839);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.21 0.034 264.665);
+  --sidebar-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent: oklch(0.278 0.033 256.848);
+  --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Navbar link animation */
+.nav-link {
+  @apply relative inline-block text-white transition-colors duration-300;
 }
+.nav-link:hover {
+  color: var(--color-indigo-accent);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  width: 0;
+  background: var(--color-indigo-accent);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Optional fade animation for Dialog overlay */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease forwards;
+}
+.animate-fadeOut {
+  animation: fadeOut 0.3s ease forwards;
+}
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(99, 102, 241, 0.15),
+    rgba(139, 92, 246, 0.05),
+    transparent 70%
+  );
+  z-index: -1;
+}
+
+/* Optional: subtle background gradient overlay */
+.gradient-overlay {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(99, 102, 241, 0.07),
+    rgba(15, 23, 42, 0) 70%
+  );
+}
+
+/* --- skill card glow (subtle rotating conic gradient) --- */
+.skill-glow {
+  background: conic-gradient(from 120deg at 50% 50%, rgba(99,102,241,0.12), rgba(139,92,246,0.06), rgba(99,102,241,0.12));
+  filter: blur(8px);
+  opacity: 0.25;
+  transform: scale(1.02);
+  transition: opacity 260ms ease, transform 260ms ease;
+  z-index: 0;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* make glow slightly stronger on hover of the group container */
+.group:hover .skill-glow {
+  opacity: 0.42;
+  transform: scale(1.04);
+}
+
+/* slower rotation (optional) */
+@keyframes slow-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* if you want to animate rotation - uncomment class usage */
+.rotate-slow {
+  animation: slow-spin 10s linear infinite;
+}
+
+/* small responsive tweaks for icon label contrast */
+.skill-card img {
+  /* ensure SVGs inherit well on dark bg */
+  filter: none;
+}
+
+/* optional: make tab triggers look a bit nicer */
+[data-state="active"] {
+  /* if shadcn triggers set data-state, it will highlight active */
+  outline: none;
+}
+@keyframes border-glow {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(180deg); }
+}
+.animate-border-glow {
+  animation: border-glow 6s linear infinite;
+}
+
+
