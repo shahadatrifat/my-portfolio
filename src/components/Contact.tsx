@@ -173,7 +173,7 @@ export default function Contact() {
                     </div>
 
                     <div className="text-sm text-[var(--color-midnight-200)]">
-                      <span className="opacity-70">{`I'll reply ASAP.`}</span>
+                      <span className="opacity-70">{"I'll reply ASAP."}</span>
                     </div>
                   </div>
                 </div>
@@ -190,7 +190,7 @@ export default function Contact() {
                 </div>
                 <h3 className="text-xl font-semibold text-white">Message sent</h3>
                 <p className="text-[var(--color-midnight-200)] text-center">
-                  {`Thanks — I’ll get back to you soon. If it's urgent, email me directly at`}{" "}
+                  {"Thanks — I’ll get back to you soon. If it's urgent, email me directly at"}{" "}
                   <a
                     href="mailto:contact.shahadat.rifat@gmail.com"
                     className="text-white underline"
