@@ -251,7 +251,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={root}
-      className="section relative container mx-auto px-4 sm:px-6 lg:px-8 ppy-20 md:py-28"
+      className="section relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32"
     >
       <div className="max-w-5xl mx-auto text-center">
         <h2
@@ -285,7 +285,10 @@ export default function Skills() {
               <TabsTrigger
                 key={tab}
                 value={tab}
-                className="transition-all duration-300 hover:text-[var(--color-indigo-accent)] hover:scale-105"
+                className="px-4 py-2 rounded-md text-[var(--color-midnight-200)] transition-all duration-300 
+                hover:text-[var(--color-indigo-accent)] hover:scale-105
+                data-[state=active]:bg-[rgba(99,102,241,0.15)] data-[state=active]:border data-[state=active]:border-[var(--color-indigo-accent)]/40
+                data-[state=active]:text-[var(--color-indigo-accent)] data-[state=active]:font-semibold data-[state=active]:shadow-md data-[state=active]:shadow-[var(--color-indigo-accent)]/20"
               >
                 {tab === "frontend"
                   ? "Frontend"

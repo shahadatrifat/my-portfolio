@@ -178,23 +178,30 @@ p {
 
 /* Navbar link animation */
 .nav-link {
-  @apply relative inline-block text-white transition-colors duration-300;
+  @apply relative inline-block text-white transition-all duration-300 cursor-pointer;
 }
 .nav-link:hover {
   color: var(--color-indigo-accent);
+  transform: translateY(-2px);
 }
 .nav-link::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -3px;
+  left: 50%;
+  bottom: -4px;
   height: 2px;
   width: 0;
-  background: var(--color-indigo-accent);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--color-indigo-accent), var(--color-violet-accent));
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
 .nav-link:hover::after {
   width: 100%;
+  box-shadow: 0 0 8px var(--color-indigo-accent);
+}
+.nav-link:active {
+  transform: translateY(0);
 }
 
 /* Optional fade animation for Dialog overlay */
