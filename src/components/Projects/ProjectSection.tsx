@@ -49,7 +49,6 @@ export default function ProjectSection() {
       });
     }, containerRef);
 
-    // Cleanup on unmount
     return () => {
       ctx.revert();
       requestAnimationFrame(() => ScrollTrigger.refresh());
