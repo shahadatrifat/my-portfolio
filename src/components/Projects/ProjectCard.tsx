@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
-import { Button } from "../ui/button";
+import { Github, ExternalLink } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -66,31 +65,33 @@ export default function ProjectCard({
             ))}
           </div>
 
-          <div className="relative flex flex-row gap-4 justify-center items-center">
-          <Button className="btn-primary flex items-center justify-center px-6 py-3 transition-all duration-300 hover:scale-105">
+          <div className="flex gap-3 pt-2">
             <a
-            href={live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className=" "
-          >
-            View Live
-          </a>
-          </Button>
+              href={live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] text-white hover:shadow-lg hover:shadow-[var(--color-indigo-accent)]/50 whitespace-nowrap transition-all duration-300 hover:scale-[1.02] active:scale-95 group/btn"
+            >
+              <span>View Live</span>
+              <ExternalLink
+                size={16}
+                className="flex-shrink-0 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+              />
+            </a>
 
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:border-[var(--color-indigo-accent)] whitespace-nowrap transition-all duration-300 hover:scale-105 group"
-          >
-            <span>Source Code</span>
-            <Github
-              size={20}
-              className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </a>
-        </div>
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] hover:border-[var(--color-indigo-accent)] whitespace-nowrap transition-all duration-300 hover:scale-[1.02] active:scale-95 group/btn"
+            >
+              <span>Code</span>
+              <Github
+                size={16}
+                className="flex-shrink-0 transition-transform duration-300 group-hover/btn:translate-x-1"
+              />
+            </a>
+          </div>
         </div>
       </motion.div>
     );
@@ -147,18 +148,22 @@ export default function ProjectCard({
             href={live}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary flex items-center justify-center px-6 py-3 transition-all duration-300 hover:scale-105"
+            className="flex items-center justify-center gap-2 min-w-[140px] px-6 py-3 text-base font-medium rounded-lg bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] text-white hover:shadow-xl hover:shadow-[var(--color-indigo-accent)]/50 whitespace-nowrap transition-all duration-300 hover:scale-105 group"
           >
-            View Live
+            <span>View Live</span>
+            <ExternalLink
+              size={20}
+              className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
 
           <a
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:border-[var(--color-indigo-accent)] whitespace-nowrap transition-all duration-300 hover:scale-105 group"
+            className="flex items-center justify-center gap-2 min-w-[140px] px-6 py-3 text-base font-medium rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:bg-[rgba(255,255,255,0.1)] hover:border-[var(--color-indigo-accent)] whitespace-nowrap transition-all duration-300 hover:scale-105 group"
           >
-            <span>Source Code</span>
+            <span>Code</span>
             <Github
               size={20}
               className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
