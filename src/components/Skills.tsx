@@ -279,21 +279,23 @@ export default function Skills() {
         >
           <TabsList
             className="mb-8 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)]
-            rounded-lg p-1 flex justify-center flex-wrap gap-2"
+            rounded-lg p-1.5 inline-flex justify-center gap-1"
           >
             {["frontend", "backend", "tools"].map((tab) => (
               <TabsTrigger
                 key={tab}
                 value={tab}
-                className="px-4 py-2 rounded-md text-[var(--color-midnight-200)] transition-all duration-300 
-                hover:text-[var(--color-indigo-accent)] hover:scale-105
-                data-[state=active]:bg-[rgba(99,102,241,0.15)] data-[state=active]:border data-[state=active]:border-[var(--color-indigo-accent)]/40
-                data-[state=active]:text-[var(--color-indigo-accent)] data-[state=active]:font-semibold data-[state=active]:shadow-md data-[state=active]:shadow-[var(--color-indigo-accent)]/20"
+                className="px-3 py-2 text-sm md:text-base rounded-md !text-[var(--color-midnight-200)] !bg-transparent transition-all duration-300 
+                hover:!text-[var(--color-indigo-accent)] hover:scale-105
+                data-[state=active]:!bg-[rgba(99,102,241,0.2)] 
+                data-[state=active]:!text-[var(--color-indigo-accent)] data-[state=active]:font-semibold 
+                data-[state=active]:shadow-sm data-[state=active]:!shadow-[var(--color-indigo-accent)]/20
+                whitespace-nowrap"
               >
                 {tab === "frontend"
                   ? "Frontend"
                   : tab === "backend"
-                  ? "Backend & Auth"
+                  ? "Backend"
                   : "Database & Tools"}
               </TabsTrigger>
             ))}

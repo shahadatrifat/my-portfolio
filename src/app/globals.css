@@ -290,6 +290,20 @@ p {
   /* if shadcn triggers set data-state, it will highlight active */
   outline: none;
 }
+
+/* Force all TabsTrigger to have no background by default */
+[role="tab"] {
+  background: transparent !important;
+}
+
+[role="tab"]:hover {
+  background: transparent !important;
+}
+
+/* Only active tabs get background */
+[role="tab"][data-state="active"] {
+  background: rgba(99, 102, 241, 0.15) !important;
+}
 @keyframes border-glow {
   0%, 100% { filter: hue-rotate(0deg); }
   50% { filter: hue-rotate(180deg); }
