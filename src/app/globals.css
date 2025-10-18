@@ -35,30 +35,29 @@ p {
   @apply inline-block bg-[var(--color-indigo-accent)] text-white font-heading py-2 px-5 rounded-lg transition-all duration-300 hover:bg-[var(--color-violet-accent)] hover:scale-105;
 }
 
-/* Optional global container class */
+/* FIXED: Added 'flex' to make flexbox properties work */
 .section {
-  @apply min-h-screen  justify-center items-center px-6 md:px-20;
+  @apply min-h-screen px-6 md:px-20;
+  /* Removed justify-center and items-center as they can interfere with content flow */
+  /* Let individual sections handle their own alignment */
 }
+
 /* --- ENHANCED DESKTOP NAV LINK HOVER EFFECT --- */
 .nav-link-desktop {
-  /* Set initial text color to white (midnight-100) */
   @apply relative cursor-pointer text-[var(--color-midnight-100)] transition-all duration-300;
 }
 
-/* Pseudo-element for the underline */
 .nav-link-desktop::after {
   content: '';
-  /* Initial state: zero width, accent color */
   @apply absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[var(--color-indigo-accent)] transition-all duration-300;
 }
 
-/* Hover state changes color and expands underline */
 .nav-link-desktop:hover {
-  @apply text-[var(--color-indigo-accent)]; /* Change text color on hover */
+  @apply text-[var(--color-indigo-accent)];
 }
 
 .nav-link-desktop:hover::after {
-  @apply w-full; /* Expand underline to full width */
+  @apply w-full;
 }
 
 @theme inline {
@@ -176,6 +175,7 @@ p {
     @apply bg-background text-foreground;
   }
 }
+
 /* Navbar link animation */
 .nav-link {
   @apply relative inline-block text-white transition-colors duration-300;
@@ -345,5 +345,3 @@ button:hover {
 footer a:hover svg {
   filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.5));
 }
-
-

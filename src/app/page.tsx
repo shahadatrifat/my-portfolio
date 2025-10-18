@@ -8,7 +8,7 @@ import Skills from "@/components/Skills";
 
 export default function Home() {
   return (
-     <main className="space-y-8">
+    <main className="bg-[var(--color-bg)]">
       <Navbar />
       <Hero />
       <About></About>

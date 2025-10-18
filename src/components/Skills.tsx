@@ -22,7 +22,6 @@ const frontend: Skill[] = [
   { id: "state", name: "Router", file: "/react-router.svg" },
   { id: "context", name: "Context", file: "/context-api.svg" },
   { id: "redux", name: "Redux", file: "/redux.svg" },
-
 ];
 
 const backend: Skill[] = [
@@ -43,28 +42,51 @@ const tools: Skill[] = [
 export default function Skills() {
   const root = useRef<HTMLElement | null>(null);
   const [activeTab, setActiveTab] = useState("frontend");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (!root.current) return;
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!root.current || !isClient) return;
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 640px)", () => {
-      gsap.from(".skills-title", {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root.current, start: "top 85%" },
-      });
+      // Set initial visible state to prevent blank screen
+      gsap.set(".skills-title", { opacity: 1, y: 0 });
+      gsap.set(".skills-line", { opacity: 1, scaleX: 1 });
+      gsap.set(".skill-card", { opacity: 1, y: 0 });
 
-      gsap.from(".skills-line", {
-        scaleX: 0,
-        opacity: 0,
-        transformOrigin: "left center",
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root.current, start: "top 85%" },
-      });
+      gsap.fromTo(".skills-title",
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: root.current, 
+            start: "top 85%",
+            toggleActions: "play none none none"
+          },
+        }
+      );
+
+      gsap.fromTo(".skills-line",
+        { scaleX: 0, opacity: 0, transformOrigin: "left center" },
+        {
+          scaleX: 1,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: { 
+            trigger: root.current, 
+            start: "top 85%",
+            toggleActions: "play none none none"
+          },
+        }
+      );
 
       gsap.utils.toArray<HTMLElement>(".skill-card").forEach((card) => {
         gsap.fromTo(
@@ -78,7 +100,7 @@ export default function Skills() {
             scrollTrigger: {
               trigger: card,
               start: "top 90%",
-              toggleActions: "play none none reverse",
+              toggleActions: "play none none none",
             },
           }
         );
@@ -86,7 +108,7 @@ export default function Skills() {
     });
 
     return () => mm.revert();
-  }, []);
+  }, [isClient]);
 
   const panelVariants = {
     hidden: { opacity: 0, y: 25 },
@@ -142,7 +164,6 @@ export default function Skills() {
     const [coords, setCoords] = useState({ x: 0, y: 0 });
     const [targetCoords, setTargetCoords] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
-    const [isIconHover, setIsIconHover] = useState(false);
 
     useEffect(() => {
       let animationFrame: number;
@@ -204,21 +225,16 @@ export default function Skills() {
           hover:border-[var(--color-indigo-accent)] transition-all duration-300"
         >
           <motion.div
-            onMouseEnter={() => setIsIconHover(true)}
-            onMouseLeave={() => setIsIconHover(false)}
-            animate={
-              isIconHover ? { rotate: 12, scale: 1.15 } : { rotate: 0, scale: 1 }
-            }
+            whileHover={{ rotate: 12, scale: 1.15 }}
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
             className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center"
           >
             <Image
               src={skill.file}
-              alt=""
-              aria-hidden="true"
+              alt={skill.name}
               width={56}
               height={56}
-              className="object-contain select-none pointer-events-none"
+              className="object-contain select-none"
               priority
             />
           </motion.div>
@@ -235,7 +251,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={root}
-      className="section relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32"
+      className="section relative container mx-auto px-4 sm:px-6 lg:px-8 ppy-20 md:py-28"
     >
       <div className="max-w-5xl mx-auto text-center">
         <h2
