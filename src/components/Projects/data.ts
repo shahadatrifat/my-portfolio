@@ -16,7 +16,7 @@ export const projects = [
       "An elegant virtual bookshelf where users can add, review, and upvote books, featuring smooth animations and MongoDB backend.",
     tech: [ "React", "Express.js", "MongoDB", "Framer Motion", "TailwindCSS"],
     image: "/foliora.png",
-    live: "https://foliora.vercel.app",
+    live: "https://foliora.netlify.app/",
     github: "https://github.com/shahadatrifat/foliora-frontend",
   },
   {

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github, ExternalLink } from "lucide-react";
+import { Github } from "lucide-react";
+import { Button } from "../ui/button";
 
 interface ProjectCardProps {
   title: string;
@@ -39,9 +40,9 @@ export default function ProjectCard({
             src={image}
             alt={title}
             fill
-            className="object-cover object-center brightness-[0.75] group-hover:scale-105 transition-transform duration-500"
+            className="object-cover object-center brightness-[0.6] blur-[0.5px] group-hover:scale-105 group-hover:blur-0 transition-all duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(15,23,42,0.9)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,23,42,0.3)] via-[rgba(15,23,42,0.4)] to-[rgba(15,23,42,0.95)]" />
         </div>
 
         {/* Content */}
@@ -65,33 +66,31 @@ export default function ProjectCard({
             ))}
           </div>
 
-          <div className="flex gap-3 pt-2">
+          <div className="relative flex flex-row gap-4 justify-center items-center">
+          <Button className="btn-primary flex items-center justify-center px-6 py-3 transition-all duration-300 hover:scale-105">
             <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 btn-primary inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95 group/btn"
-            >
-              View Live
-              <ExternalLink
-                size={16}
-                className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-              />
-            </a>
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+            className=" "
+          >
+            View Live
+          </a>
+          </Button>
 
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] hover:border-[var(--color-indigo-accent)] transition-all duration-300 hover:scale-[1.02] active:scale-95 group/btn"
-            >
-              Code
-              <Github
-                size={16}
-                className="transition-transform duration-300 group-hover/btn:translate-x-1"
-              />
-            </a>
-          </div>
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:border-[var(--color-indigo-accent)] whitespace-nowrap transition-all duration-300 hover:scale-105 group"
+          >
+            <span>Source Code</span>
+            <Github
+              size={20}
+              className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </a>
+        </div>
         </div>
       </motion.div>
     );
@@ -113,9 +112,11 @@ export default function ProjectCard({
           alt={title}
           fill
           priority
-          className="object-cover object-center brightness-[0.7] contrast-[1.05]"
+          className="object-cover object-center brightness-[0.5] contrast-[1.1] blur-[1.5px]"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,23,42,0.2)] via-[rgba(15,23,42,0.32)] to-[rgba(15,23,42,0.5)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,23,42,0.5)] via-[rgba(15,23,42,0.6)] to-[rgba(15,23,42,0.75)]" />
+        {/* Extra overlay to reduce text visibility */}
+        <div className="absolute inset-0 bg-[rgba(15,23,42,0.3)] backdrop-blur-[2px]" />
       </motion.div>
 
       {/* Content */}
@@ -146,25 +147,21 @@ export default function ProjectCard({
             href={live}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center gap-2 px-6 py-3 transition-all duration-300 hover:scale-105 group"
+            className="btn-primary flex items-center justify-center px-6 py-3 transition-all duration-300 hover:scale-105"
           >
             View Live
-            <ExternalLink
-              size={20}
-              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
           </a>
 
           <a
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:border-[var(--color-indigo-accent)] transition-all duration-300 hover:scale-105 group"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:border-[var(--color-indigo-accent)] whitespace-nowrap transition-all duration-300 hover:scale-105 group"
           >
-            Source Code
+            <span>Source Code</span>
             <Github
               size={20}
-              className="transition-transform duration-300 group-hover:translate-x-1"
+              className="flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1"
             />
           </a>
         </div>
