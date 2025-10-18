@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Github } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -23,14 +23,83 @@ export default function ProjectCard({
   github,
   isMobile = false,
 }: ProjectCardProps) {
+  // Mobile card (vertical layout)
+  if (isMobile) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="relative rounded-xl overflow-hidden bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] backdrop-blur-sm hover:border-[var(--color-indigo-accent)] transition-all duration-300 group"
+      >
+        {/* Image Container */}
+        <div className="relative h-52 sm:h-72 w-full overflow-hidden">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover object-center brightness-[0.75] group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(15,23,42,0.9)]" />
+        </div>
+
+        {/* Content */}
+        <div className="relative p-5 sm:p-6 space-y-3 sm:space-y-4">
+          <h3 className="text-xl sm:text-2xl font-heading font-semibold bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] bg-clip-text text-transparent">
+            {title}
+          </h3>
+
+          <p className="text-sm sm:text-base text-[var(--color-midnight-200)] leading-relaxed line-clamp-3">
+            {description}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {tech.map((t, i) => (
+              <span
+                key={`${title}-${t}-${i}`}
+                className="text-xs bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] px-2.5 py-1 rounded-full backdrop-blur-sm hover:border-[var(--color-indigo-accent)] transition-colors duration-200"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex gap-3 pt-2">
+            <a
+              href={live}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 btn-primary inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-all duration-300 hover:scale-[1.02] active:scale-95 group/btn"
+            >
+              View Live
+              <ExternalLink
+                size={16}
+                className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+              />
+            </a>
+
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-medium rounded-lg bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.08)] hover:border-[var(--color-indigo-accent)] transition-all duration-300 hover:scale-[1.02] active:scale-95 group/btn"
+            >
+              Code
+              <Github
+                size={16}
+                className="transition-transform duration-300 group-hover/btn:translate-x-1"
+              />
+            </a>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  // Desktop card (full-screen horizontal)
   return (
-    <div
-      className={`project-card relative ${
-        isMobile
-          ? "min-w-full h-auto py-16"
-          : "min-w-[100vw] h-screen flex items-center justify-center"
-      } overflow-hidden`}
-    >
+    <div className="project-card relative min-w-[100vw] h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <motion.div
         className="absolute inset-0"
@@ -50,18 +119,14 @@ export default function ProjectCard({
       </motion.div>
 
       {/* Content */}
-      <div
-        className={`project-content relative z-10 max-w-3xl px-6 ${
-          isMobile ? "text-center py-12" : "text-center"
-        } text-[var(--color-midnight-100)]`}
-      >
+      <div className="project-content relative z-10 max-w-3xl px-6 text-center text-[var(--color-midnight-100)]">
         <div className="absolute inset-0 blur-3xl opacity-20 bg-[radial-gradient(circle_at_center,var(--color-indigo-accent)_0%,transparent_70%)]"></div>
 
-        <h3 className="relative text-3xl md:text-5xl font-heading font-semibold mb-4 bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] bg-clip-text text-transparent">
+        <h3 className="relative text-4xl md:text-5xl lg:text-6xl font-heading font-semibold mb-4 bg-gradient-to-r from-[var(--color-indigo-accent)] to-[var(--color-violet-accent)] bg-clip-text text-transparent">
           {title}
         </h3>
 
-        <p className="relative text-sm md:text-lg text-[var(--color-midnight-200)] mb-6 leading-relaxed max-w-2xl mx-auto">
+        <p className="relative text-base md:text-lg text-[var(--color-midnight-200)] mb-6 leading-relaxed max-w-2xl mx-auto">
           {description}
         </p>
 
@@ -69,35 +134,32 @@ export default function ProjectCard({
           {tech.map((t, i) => (
             <span
               key={`${title}-${t}-${i}`}
-              className="text-xs md:text-base bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] px-3 py-1 rounded-full backdrop-blur-sm hover:border-[var(--color-indigo-accent)] transition-all duration-300"
+              className="text-sm md:text-base bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] px-4 py-2 rounded-full backdrop-blur-sm hover:border-[var(--color-indigo-accent)] transition-all duration-300"
             >
               {t}
             </span>
           ))}
         </div>
 
-        <div
-          className={`relative flex ${
-            isMobile
-              ? "flex-col gap-3 items-center"
-              : "flex-row gap-4 justify-center items-center"
-          }`}
-        >
+        <div className="relative flex flex-row gap-4 justify-center items-center">
           <a
             href={live}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary inline-flex items-center gap-2 px-5 py-3 transition-all duration-300 hover:scale-105 group"
+            className="btn-primary inline-flex items-center gap-2 px-6 py-3 transition-all duration-300 hover:scale-105 group"
           >
             View Live
-            
+            <ExternalLink
+              size={20}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
 
           <a
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary inline-flex items-center gap-2 px-5 py-3 transition-all duration-300 hover:scale-105 group"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[rgba(255,255,255,0.08)] border border-[rgba(255,255,255,0.15)] hover:border-[var(--color-indigo-accent)] transition-all duration-300 hover:scale-105 group"
           >
             Source Code
             <Github
