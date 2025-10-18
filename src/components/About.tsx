@@ -33,24 +33,27 @@ export default function About() {
           start: "top 80%",
           toggleActions: "play none none none",
         },
-        defaults: { ease: "power3.out", duration: 0.8 },
+        defaults: { ease: "power3.out", duration: 0.5 },
       });
 
       tl.fromTo(".about-title", 
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, delay: 0.05 }
+        { y: 0, opacity: 1 }
       )
       .fromTo(".about-line",
         { scaleX: 0, opacity: 0, transformOrigin: "left center" },
-        { scaleX: 1, opacity: 1 }
+        { scaleX: 1, opacity: 1 },
+        "-=0.3"
       )
       .fromTo(".about-text",
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1 }
+        { y: 0, opacity: 1 },
+        "-=0.2"
       )
       .fromTo(".about-card",
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.12 }
+        { y: 0, opacity: 1, stagger: 0.08 },
+        "-=0.2"
       );
     }, root);
 
