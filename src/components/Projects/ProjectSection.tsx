@@ -90,7 +90,6 @@ export default function ProjectSection() {
       ref={containerRef}
       className="relative overflow-hidden"
     >
-      {/* Desktop Heading - Fixed at top */}
       <div className="absolute top-0 left-0 right-0 z-20 pt-20 pb-10 bg-gradient-to-b from-[var(--color-midnight-900)] via-[var(--color-midnight-900)] to-transparent pointer-events-none">
         <div className="max-w-6xl mx-auto text-center px-6">
           <h2 className="text-4xl md:text-5xl font-heading font-semibold mb-3
